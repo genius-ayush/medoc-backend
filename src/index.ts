@@ -1,12 +1,22 @@
+import express from 'express' ; 
+import mongoose from 'mongoose' ; 
+import cors from 'cors' ; 
+import dotenv from 'dotenv' ; 
+dotenv.config() ; 
+const database_url = process.env.MONGO_API_KEY || 'fallback_database_url'
 
-import express from "express"
-const app = express()
-const port = 3000
+const app = express() ; 
+const port = 3000 ; 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.use(cors()) ; 
+app.use(express.json()) ; 
+
+
+mongoose.connect(database_url , {
+    dbName : 'medoc'
+}).then(()=>{
+    console.log("connected to mongoDb") ; 
+}).catch(err=>{
+    console.error('Error connecting to mongoDb'  , err) ; 
 })
