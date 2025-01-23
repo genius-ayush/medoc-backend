@@ -1,7 +1,7 @@
 import { Request , Response , NextFunction } from "express"
 import jwt from "jsonwebtoken";
-const USER_SECRET = "USERSECr3t" ; 
-const ADMIN_SECRET = "ADMINsECr3t" ; 
+const userSecret = process.env.USER_SECRET || 'userSecret' ; 
+const adminSecret = process.env.ADMIN_SECRET || 'adminSecret' ; 
 
 
 export const userAuthenticateJwt =(req : Request , res: Response , next : NextFunction)=>{
@@ -11,7 +11,7 @@ export const userAuthenticateJwt =(req : Request , res: Response , next : NextFu
     if(authHeader){
         const token = authHeader.split(" ")[1] ; 
         
-        jwt.verify(token , USER_SECRET , (err , payload)=>{
+        jwt.verify(token , userSecret , (err , payload)=>{
             if(err){
                 return res.sendStatus(403) ;
             }
@@ -42,7 +42,7 @@ export const adminAuthenticateJwt =( req : Request , res: Response , next: NextF
 
         const token = authHeader.split(" ")[1] ; 
 
-        jwt.verify(token , ADMIN_SECRET , (err , payload)=>{
+        jwt.verify(token , adminSecret , (err , payload)=>{
 
             if(err){
                 return res.sendStatus(403)

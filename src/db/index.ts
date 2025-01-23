@@ -24,4 +24,4 @@ export const noteSchema = new mongoose.Schema({
 
 export const User = mongoose.model('User' , userSchema) ; 
 export const Admin = mongoose.model('Admin' , adminSchema) ; 
-export const Post = mongoose.model('Note' , noteSchema) ; 
+export const Note = mongoose.model('Note' , noteSchema) ; 
