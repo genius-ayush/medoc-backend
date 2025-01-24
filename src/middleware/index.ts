@@ -6,8 +6,7 @@ const adminSecret = process.env.ADMIN_SECRET || 'adminSecret' ;
 
 export const userAuthenticateJwt =(req : Request , res: Response , next : NextFunction)=>{
 
-    const authHeader = req.headers.authorization ; 
-
+    const authHeader = req.headers.authorization ;
     if(authHeader){
         const token = authHeader.split(" ")[1] ; 
         

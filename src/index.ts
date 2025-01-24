@@ -16,7 +16,7 @@ app.use(cors()) ;
 app.use(express.json()) ; 
 
 app.use("/auth" , authRoutes) ; 
-app.use("/notes" , noteRoutes) ; 
+app.use("/note" , noteRoutes) ; 
 
 app.listen( port , ()=>{
     console.log(`app listening at http://localhost: ${port}`)

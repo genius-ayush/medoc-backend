@@ -51,10 +51,23 @@ router.post("/adminRegister" , async(req ,res)=>{
     if(user){
         res.status(403).json({message: "user already axist"}) ; 
     }else{
-        const newAdmin = new User({name , email , password}) ; 
+        const newAdmin = new Admin({name , email , password}) ; 
         await newAdmin.save() ; 
         const token = jwt.sign({id: newAdmin._id} , adminSecret , {expiresIn: '1h'}) 
         res.json({message:'admin created successfully' , token , adminId : newAdmin._id})
+    }
+})
+
+router.post('/adminLogin' , async(req , res)=>{
+
+    const {email , password} = req.body ; 
+    const user = await User.findOne({email , password}) ; 
+
+    if(user){
+        const token = jwt.sign( {id: user._id} , adminSecret , {expiresIn: '1h'})
+        res.json({message: 'admin Logged in Succefully' , token , userId: user._id}) ; 
+    }else{
+        res.status(403).json({message : "invalid email or password"}) ; 
     }
 })
 
