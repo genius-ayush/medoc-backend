@@ -164,7 +164,7 @@ router.delete("/users/:id" , adminAuthenticateJwt , async(req , res)=>{
 
         if (!deletedUser) {
             res.status(404).json({ error: "user not found " });
-            return;
+            return; 
           }
 
           res.status(200).json({ message: "User deleted successfully", note: deletedUser });
@@ -175,7 +175,7 @@ router.delete("/users/:id" , adminAuthenticateJwt , async(req , res)=>{
     }
 })
 
-// get all notes
+
 
 router.get("/notes" , adminAuthenticateJwt , async(req, res)=>{
     try{
